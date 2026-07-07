@@ -20,11 +20,34 @@ os.chdir(osp.dirname(osp.abspath(__file__)))  # 确保工作目录是脚本所�
 
 WINDOW_TITLE = "Target detection system"
 WELCOME_SENTENCE = "YOLO11 摔倒检测系统"
-ICON_IMAGE = "images/UI/lufei.png"
-IMAGE_LEFT_INIT = "images/UI/up.jpeg"
-IMAGE_RIGHT_INIT = "images/UI/right.jpeg"
 USERNAME = "admin"
 PASSWORD = "admin"
+
+
+def _create_placeholder_pixmap(text, width, height, bg_color=(200, 200, 200), text_color=(100, 100, 100)):
+    """创建带文字的占位图像"""
+    pixmap = QPixmap(width, height)
+    pixmap.fill(QColor(*bg_color))
+    painter = QPainter(pixmap)
+    painter.setPen(QColor(*text_color))
+    font = QFont('楷体', 18)
+    painter.setFont(font)
+    painter.drawText(QRect(0, 0, width, height), Qt.AlignCenter, text)
+    painter.end()
+    return pixmap
+
+
+def _create_app_icon():
+    """创建程序图标"""
+    pixmap = QPixmap(64, 64)
+    pixmap.fill(QColor(48, 124, 208))
+    painter = QPainter(pixmap)
+    painter.setPen(QColor(255, 255, 255))
+    font = QFont('楷体', 22)
+    painter.setFont(font)
+    painter.drawText(QRect(0, 0, 64, 64), Qt.AlignCenter, "Y")
+    painter.end()
+    return QIcon(pixmap)
 
 
 class MainWindow(QTabWidget):
@@ -32,7 +55,7 @@ class MainWindow(QTabWidget):
         super().__init__()
         self.setWindowTitle(WINDOW_TITLE)       # 系统界面标题
         self.resize(1200, 800)                  # 系统初始化大小
-        self.setWindowIcon(QIcon(ICON_IMAGE))   # 系统logo图像
+        self.setWindowIcon(_create_app_icon())   # 系统logo图像
         self.output_size = 480                  # 上传的图像和视频在系统界面上显示的大小
         self.img2predict = ""                   # 要进行预测的图像路径
         self.init_vid_id = '0'                  # 网络摄像头修改 包括ip或者是ip地址的修改
@@ -78,8 +101,8 @@ class MainWindow(QTabWidget):
         mid_img_layout = QHBoxLayout()
         self.left_img = QLabel()
         self.right_img = QLabel()
-        self.left_img.setPixmap(QPixmap(IMAGE_LEFT_INIT))
-        self.right_img.setPixmap(QPixmap(IMAGE_RIGHT_INIT))
+        self.left_img.setPixmap(_create_placeholder_pixmap("图片预览", 480, 360))
+        self.right_img.setPixmap(_create_placeholder_pixmap("检测结果", 480, 360))
         self.left_img.setAlignment(Qt.AlignCenter)
         self.right_img.setAlignment(Qt.AlignCenter)
         mid_img_layout.addWidget(self.left_img)
@@ -119,7 +142,7 @@ class MainWindow(QTabWidget):
         vid_title = QLabel("视频检测功能")
         vid_title.setFont(font_title)
         self.vid_img = QLabel()
-        self.vid_img.setPixmap(QPixmap("images/UI/up.jpeg"))
+        self.vid_img.setPixmap(_create_placeholder_pixmap("视频检测", 480, 360))
         vid_title.setAlignment(Qt.AlignCenter)
         self.vid_img.setAlignment(Qt.AlignCenter)
         self.webcam_detection_btn = QPushButton("摄像头实时监测")
@@ -168,7 +191,7 @@ class MainWindow(QTabWidget):
         about_title.setFont(QFont('楷体', 18))
         about_title.setAlignment(Qt.AlignCenter)
         about_img = QLabel()
-        about_img.setPixmap(QPixmap('images/UI/zhu.jpg'))
+        about_img.setPixmap(_create_placeholder_pixmap("YOLO11\n摔倒检测系统", 400, 200, bg_color=(48, 124, 208), text_color=(255, 255, 255)))
         self.model_label = QLabel("当前模型：{}".format(self.model_path))
         self.model_label.setFont(font_main)
         change_model_button = QPushButton("切换模型")
@@ -286,7 +309,7 @@ class MainWindow(QTabWidget):
         config_layout = QVBoxLayout()
         config_vid_title = QLabel("配置信息修改")
         config_icon_label = QLabel()
-        config_icon_label.setPixmap(QPixmap("images/UI/config.png"))
+        config_icon_label.setPixmap(self.style().standardIcon(QStyle.SP_FileDialogDetailedView).pixmap(80, 80))
         config_icon_label.setAlignment(Qt.AlignCenter)
         config_vid_title.setAlignment(Qt.AlignCenter)
         config_vid_title.setFont(font_title)
@@ -298,14 +321,15 @@ class MainWindow(QTabWidget):
         config_widget.setLayout(config_layout)
 
 
+        style = self.style()
         self.addTab(about_widget, '主页')
         self.addTab(img_detection_widget, '图片检测')
         self.addTab(vid_detection_widget, '视频检测')
         self.addTab(config_widget, '配置信息')
-        self.setTabIcon(0, QIcon(ICON_IMAGE))
-        self.setTabIcon(1, QIcon(ICON_IMAGE))
-        self.setTabIcon(2, QIcon(ICON_IMAGE))
-        self.setTabIcon(3, QIcon(ICON_IMAGE))
+        self.setTabIcon(0, style.standardIcon(QStyle.SP_ComputerIcon))
+        self.setTabIcon(1, style.standardIcon(QStyle.SP_FileDialogContentsView))
+        self.setTabIcon(2, style.standardIcon(QStyle.SP_MediaPlay))
+        self.setTabIcon(3, style.standardIcon(QStyle.SP_FileDialogDetailedView))
 
 
     def upload_img(self):
@@ -321,7 +345,7 @@ class MainWindow(QTabWidget):
             cv2.imwrite("images/tmp/upload_show_result.jpg", im0)
             self.img2predict = save_path                               # 给变量进行赋值方便后面实际进行读取
             self.left_img.setPixmap(QPixmap("images/tmp/upload_show_result.jpg"))
-            self.right_img.setPixmap(QPixmap(IMAGE_RIGHT_INIT))
+            self.right_img.setPixmap(_create_placeholder_pixmap("检测结果", 480, 360))
             self.img_num_label.setText("当前检测结果：待检测")
 
     def change_model(self):
@@ -475,7 +499,7 @@ class MainWindow(QTabWidget):
         """重置摄像头内容"""
         self.webcam_detection_btn.setEnabled(True)                      # 打开摄像头检测的按钮
         self.mp4_detection_btn.setEnabled(True)                         # 打开视频文件检测的按钮
-        self.vid_img.setPixmap(QPixmap(IMAGE_LEFT_INIT))                # 重新设置视频检测页面的初始化图像
+        self.vid_img.setPixmap(_create_placeholder_pixmap("视频检测", 480, 360))  # 重新设置视频检测页面的初始化图像
         self.webcam = True                                              # 重新将摄像头设置为true
         self.vid_num_label.setText("当前检测结果：{}".format("等待检测"))   # 重新设置视频检测页面的文字内容
 

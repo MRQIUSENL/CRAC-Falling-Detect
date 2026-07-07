@@ -37,6 +37,27 @@ tensorboard/
 wandb/
 logs/
 
+# ========== 其他模型格式 ==========
+*.mlmodel
+*.mlpackage
+*.torchscript
+*.tflite
+*.h5
+*_saved_model/
+*_web_model/
+*_openvino_model/
+*_paddle_model/
+*_ncnn_model/
+calibration_*.npy
+
+# ========== Ultralytics 自动生成 ==========
+/ultralytics/assets/
+
+# ========== 测试 & 缓存 ==========
+.pytest_cache/
+.cache
+.python-version
+
 # ========== 数据集 ==========
 /datasets/
 /data/images/
@@ -56,6 +77,11 @@ falling_data/
 *.tar.gz
 *.rar
 *.AppImage
+
+# ========== README 图片（不受上述规则限制） ==========
+!/ReadMe pic/
+!/ReadMe pic/*
+
 
 # ========== IDE & 系统 ==========
 .idea/
