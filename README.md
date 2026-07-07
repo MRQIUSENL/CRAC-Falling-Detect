@@ -226,6 +226,7 @@ python scripts/train.py   # 编辑 DATA_CONFIG_PATH 指向你的数据集
 - [PROJECT.md](PROJECT.md) — 完整项目书（技术方案、场景分析、创新点）
 - [EVALUATION.md](EVALUATION.md) — 模型评估报告（精度/速度/混淆矩阵）
 - [SUMMARY.md](SUMMARY.md) — 技术总结（推理管道、追踪管道、闭环流程）
+- [DATA_PIPELINE.md](DATA_PIPELINE.md) — 数据采集与处理管线文档
 
 ## License
 
