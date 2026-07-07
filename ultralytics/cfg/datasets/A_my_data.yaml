@@ -1,5 +1,5 @@
 # Train/val/test sets as 1) dir: path/to/imgs, 2) file: path/to/imgs.txt, or 3) list: [path/to/imgs1, path/to/imgs2, ..]
-path: f:/CRAC-changed/yolo11-falling-detection/falling_data
+path: ../falling_data  # 数据集根目录（需本地放置）
 train: # train images (relative to 'path')  16551 images
   - images/train
 val: # val images (relative to 'path')  4952 images

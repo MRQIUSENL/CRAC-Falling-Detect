@@ -62,7 +62,7 @@
 ## 项目结构
 
 ```
-yolo11-falling/
+CRAC-Falling-Detect/
 ├── scripts/                    # 脚本与训练
 │   ├── train.py                #   多架构对比训练
 │   ├── validate.py             #   模型验证
@@ -111,7 +111,6 @@ conda create -n yolo python=3.8 -y && conda activate yolo
 conda install pytorch==1.10.0 torchvision torchaudio cudatoolkit=11.3
 
 # 安装项目依赖
-cd yolo11-falling
 pip install -e .
 ```
 

@@ -208,7 +208,7 @@ CBAM 模块的计算过程如下：
 ## 四、项目结构
 
 ```
-yolo11-falling/
+CRAC-Falling-Detect/
 ├── scripts/                    # 演示脚本与训练模型
 │   ├── train.py                #   多架构对比训练
 │   ├── validate.py             #   模型验证
@@ -286,7 +286,6 @@ conda activate yolo
 conda install pytorch==1.10.0 torchvision torchaudio cudatoolkit=11.3
 
 # 3. 安装项目依赖
-cd yolo11-falling
 pip install -e .
 
 # 4. 启动后端

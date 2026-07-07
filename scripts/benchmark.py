@@ -233,9 +233,9 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="YOLO11 摔倒检测性能验证 + 评分")
     parser.add_argument("--model", default=osp.join(SCRIPT_DIR, "runs", "yolo11n_pretrained", "train", "weights", "best.pt"),
                         help="模型权重路径")
-    parser.add_argument("--images", default=osp.normpath(osp.join(SCRIPT_DIR, "..", "..", "falling_data", "images", "test")),
+    parser.add_argument("--images", default=osp.normpath(osp.join(SCRIPT_DIR, "..", "falling_data", "images", "test")),
                         help="测试图片文件夹")
-    parser.add_argument("--labels", default=osp.normpath(osp.join(SCRIPT_DIR, "..", "..", "falling_data", "labels", "test")),
+    parser.add_argument("--labels", default=osp.normpath(osp.join(SCRIPT_DIR, "..", "falling_data", "labels", "test")),
                         help="标注文件夹 (YOLO 格式)")
     parser.add_argument("--time-limit", type=int, default=180, help="时间限制（秒）")
     parser.add_argument("--target", type=int, default=20, help="测试图片张数")

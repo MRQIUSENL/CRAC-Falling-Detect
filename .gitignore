@@ -94,3 +94,5 @@ Thumbs.db
 # ========== 密钥/环境 ==========
 .env
 secrets.yaml
+requirements.txt
+*.log
