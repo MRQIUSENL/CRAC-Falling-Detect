@@ -90,12 +90,22 @@ def benchmark(model_path, image_dir, label_dir=None, time_limit=180, target_coun
 
     # [1] 加载模型
     print(f"[1/5] 加载模型: {model_path}")
+    if not osp.isfile(model_path):
+        print(f"错误: 模型文件不存在: {model_path}")
+        print(f"请通过 --model 指定模型权重路径，例如:")
+        print(f"  python benchmark.py --model path/to/best.pt")
+        return
     t0 = time.time()
     model = YOLO(model_path)
     print(f"      模型加载耗时: {time.time() - t0:.1f}s")
 
     # [2] 收集图片
     print(f"[2/5] 扫描图片: {image_dir}")
+    if not osp.isdir(image_dir):
+        print(f"错误: 图片目录不存在: {image_dir}")
+        print(f"请通过 --images 指定测试图片目录，例如:")
+        print(f"  python benchmark.py --images path/to/test/images")
+        return
     images = []
     for fname in sorted(os.listdir(image_dir)):
         if fname.lower().endswith(('.jpg', '.jpeg', '.png', '.bmp')):
@@ -103,7 +113,7 @@ def benchmark(model_path, image_dir, label_dir=None, time_limit=180, target_coun
     print(f"      找到 {len(images)} 张图片")
 
     if len(images) == 0:
-        print("错误: 未找到任何图片")
+        print("错误: 目录中没有图片文件 (.jpg/.png/.bmp)")
         return
 
     # [3] 预热
