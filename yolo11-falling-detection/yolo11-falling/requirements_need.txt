@@ -1,0 +1,30 @@
+# CRAC2 环境全部缺失依赖
+# 安装命令: C:\Users\28015\anaconda3\envs\CRAC2\python.exe -m pip install -r requirements_need.txt
+
+--extra-index-url https://download.pytorch.org/whl/cu126
+torch
+torchvision
+torchaudio
+ultralytics
+opencv-python
+matplotlib
+numpy
+pillow
+pyyaml
+scipy
+tqdm
+psutil
+py-cpuinfo
+pandas
+seaborn
+pyside6
+pyqt5
+pyqt5-sip
+dill
+fastapi
+uvicorn
+python-multipart
+gradio
+labelme
+labelimg
+ultralytics-thop

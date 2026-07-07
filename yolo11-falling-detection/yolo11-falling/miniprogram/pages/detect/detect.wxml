@@ -1,0 +1,119 @@
+<!-- 图片检测 -->
+<view class="detect-page">
+  <!-- 图片区 -->
+  <view class="img-area">
+    <!-- 未选图 -->
+    <view class="img-upload img-placeholder" wx:if="{{!selectedImage}}" bindtap="chooseImage">
+      <view class="upload-icon">📷</view>
+      <view class="upload-title">点击选择图片</view>
+      <view class="upload-hint">支持 JPG、PNG、JPEG</view>
+    </view>
+
+    <!-- 结果对比 -->
+    <view class="img-compare" wx:if="{{annotatedImage}}">
+      <view class="compare-item">
+        <image src="{{selectedImage}}" mode="aspectFit" class="compare-img" bindtap="chooseImage"/>
+        <view class="compare-label">原图</view>
+      </view>
+      <view class="compare-vs">→</view>
+      <view class="compare-item">
+        <image src="{{annotatedImage}}" mode="aspectFit" class="compare-img"/>
+        <view class="compare-label result">结果</view>
+      </view>
+    </view>
+
+    <!-- 仅有原图 -->
+    <view class="img-single" wx:if="{{selectedImage && !annotatedImage}}">
+      <image src="{{selectedImage}}" mode="aspectFit" class="single-img" bindtap="chooseImage"/>
+      <view class="single-hint">点击图片可更换</view>
+    </view>
+  </view>
+
+  <!-- 参数面板 -->
+  <view class="param-panel card-flat" wx:if="{{selectedImage}}">
+    <view class="param-row">
+      <view class="param-head flex-between">
+        <text class="param-label">置信度阈值</text>
+        <text class="param-val">{{confThreshold}}</text>
+      </view>
+      <slider min="0.05" max="0.95" step="0.05" value="{{confThreshold}}"
+        activeColor="#4F6EF7" backgroundColor="#E5E7EB" block-size="18" bindchange="onConfChange"/>
+    </view>
+    <view class="param-row">
+      <view class="param-head flex-between">
+        <text class="param-label">IoU 阈值</text>
+        <text class="param-val">{{iouThreshold}}</text>
+      </view>
+      <slider min="0.1" max="0.9" step="0.05" value="{{iouThreshold}}"
+        activeColor="#4F6EF7" backgroundColor="#E5E7EB" block-size="18" bindchange="onIouChange"/>
+    </view>
+    <view class="param-row">
+      <text class="param-label mb-12">追踪模式</text>
+      <picker mode="selector" range="{{trackerOptions}}" value="{{trackerIndex}}" bindchange="onTrackerChange">
+        <view class="picker-box">{{trackerOptions[trackerIndex]}}</view>
+      </picker>
+    </view>
+  </view>
+
+  <!-- 按钮 -->
+  <view class="btn-area" wx:if="{{selectedImage}}">
+    <button class="btn btn-primary btn-block btn-lg" bindtap="startDetect"
+      disabled="{{detecting}}" loading="{{detecting}}">
+      {{detecting ? 'AI 检测中...' : '🔍 开始检测'}}
+    </button>
+    <view class="btn-row mt-16 gap-16">
+      <button class="btn btn-outline btn-sm flex-1" bindtap="chooseImage">换一张</button>
+      <button class="btn btn-outline btn-sm flex-1" bindtap="clearImage">清除</button>
+    </view>
+  </view>
+
+  <!-- 结果面板 -->
+  <view class="result-panel" wx:if="{{detectionResult}}">
+    <!-- 统计 -->
+    <view class="result-header card-flat">
+      <view class="stats-row">
+        <view class="stat-block">
+          <text class="stat-num text-primary">{{detectionResult.total_objects}}</text>
+          <text class="stat-label">检测目标</text>
+        </view>
+        <view class="stat-divider"></view>
+        <view class="stat-block">
+          <text class="stat-num text-success">{{detectionResult.inference_time_ms}}ms</text>
+          <text class="stat-label">推理耗时</text>
+        </view>
+      </view>
+
+      <!-- 类别标签 -->
+      <view class="tags-row mt-20" wx:if="{{countsArray.length > 0}}">
+        <view class="tag tag-primary" wx:for="{{countsArray}}" wx:key="name">
+          {{item.name}} × {{item.count}}
+        </view>
+      </view>
+    </view>
+
+    <!-- 检测列表 -->
+    <view class="result-list" wx:if="{{detectionResult.detections.length > 0}}">
+      <view class="list-header flex-between p-16">
+        <text class="text-sm font-semibold text-secondary">详细结果</text>
+        <text class="text-sm text-muted">共 {{detectionResult.detections.length}} 项</text>
+      </view>
+      <view class="det-item" wx:for="{{detectionResult.detections}}" wx:key="index">
+        <view class="det-rank">{{index + 1}}</view>
+        <view class="det-body">
+          <view class="det-name">{{item.class}}</view>
+          <view class="det-meta">
+            <text class="text-success">置信度 {{item.confidence_pct}}%</text>
+            <text class="text-muted ml-12">坐标 {{item.bbox_str}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 无检出 -->
+    <view class="empty-state" wx:if="{{detectionResult.detections.length === 0}}">
+      <view class="empty-icon">🔍</view>
+      <view class="empty-title">未检测到目标</view>
+      <view class="empty-desc">尝试降低置信度阈值或更换图片</view>
+    </view>
+  </view>
+</view>

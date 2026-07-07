@@ -1,0 +1,118 @@
+.license-page {
+  padding: 32rpx 28rpx 60rpx;
+}
+
+/* 头部 */
+.header {
+  text-align: center;
+  padding: 40rpx 0 36rpx;
+}
+.logo {
+  display: block;
+  font-size: 72rpx;
+  margin-bottom: 16rpx;
+}
+.name {
+  display: block;
+  font-size: 36rpx;
+  font-weight: 700;
+  color: #1F2937;
+  margin-bottom: 8rpx;
+}
+.ver {
+  font-size: 24rpx;
+  color: #9CA3AF;
+}
+
+/* 卡片 */
+.card {
+  background: #FFFFFF;
+  border-radius: 20rpx;
+  padding: 28rpx 28rpx 24rpx;
+  margin-bottom: 24rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0,0,0,0.04);
+}
+.card-title {
+  font-size: 28rpx;
+  font-weight: 700;
+  color: #1F2937;
+  margin-bottom: 18rpx;
+  padding-bottom: 14rpx;
+  border-bottom: 1rpx solid #F3F4F6;
+}
+
+/* 信息行 */
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12rpx 0;
+}
+.item .label {
+  font-size: 26rpx;
+  color: #6B7280;
+}
+.item .value {
+  font-size: 26rpx;
+  font-weight: 600;
+  color: #1F2937;
+}
+
+/* 许可证徽章 */
+.badge {
+  display: inline-block;
+  background: #EEF1FE;
+  color: #4F6EF7;
+  font-size: 24rpx;
+  font-weight: 700;
+  padding: 8rpx 20rpx;
+  border-radius: 8rpx;
+  margin-bottom: 16rpx;
+  letter-spacing: 1rpx;
+}
+
+/* 描述 */
+.desc {
+  display: block;
+  font-size: 26rpx;
+  color: #6B7280;
+  line-height: 1.8;
+  margin-bottom: 12rpx;
+}
+
+/* 条款 */
+.terms {
+  margin-bottom: 20rpx;
+}
+.terms:last-child {
+  margin-bottom: 0;
+}
+.term {
+  display: block;
+  font-size: 26rpx;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 8rpx;
+}
+.term-list {
+  padding-left: 8rpx;
+}
+.term-item {
+  display: block;
+  font-size: 24rpx;
+  color: #6B7280;
+  line-height: 1.9;
+}
+
+/* 完整文本 */
+.license-text {
+  background: #F9FAFB;
+  border-radius: 12rpx;
+  padding: 20rpx 24rpx;
+  font-size: 22rpx;
+  color: #6B7280;
+  line-height: 1.9;
+  font-family: monospace;
+  white-space: pre-wrap;
+  word-break: break-word;
+}

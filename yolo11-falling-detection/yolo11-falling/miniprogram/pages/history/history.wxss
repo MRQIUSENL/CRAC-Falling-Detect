@@ -1,0 +1,46 @@
+/* 历史记录 */
+.history-page { padding: 24rpx; padding-bottom: 48rpx; min-height: 100vh; }
+
+.history-head {
+  display: flex; justify-content: space-between;
+  padding: 8rpx 12rpx 20rpx;
+}
+
+/* 时间线 */
+.timeline { padding-left: 24rpx; border-left: 2rpx solid var(--border); margin-left: 20rpx; }
+
+.tl-item { position: relative; margin-bottom: 28rpx; }
+.tl-item::before {
+  content: ''; position: absolute; left: -30rpx; top: 32rpx;
+  width: 14rpx; height: 14rpx; border-radius: 50%;
+  background: var(--primary); border: 3rpx solid #fff; box-shadow: var(--shadow-sm);
+}
+
+.tl-time {
+  font-size: 22rpx; color: var(--text-muted); margin-bottom: 12rpx; margin-left: 8rpx;
+}
+
+.tl-card {
+  display: flex; align-items: center; gap: 16rpx;
+  background: #fff; border-radius: var(--radius); padding: 20rpx;
+  box-shadow: var(--shadow-sm); position: relative;
+}
+.tl-card:active { background: #FAFBFF; }
+
+.tl-thumb {
+  width: 140rpx; height: 140rpx; border-radius: var(--radius-sm);
+  background: var(--bg); flex-shrink: 0;
+}
+.tl-info { flex: 1; min-width: 0; }
+.tl-stats { display: flex; align-items: baseline; gap: 4rpx; }
+.tl-num { font-size: 36rpx; font-weight: 800; color: var(--primary); }
+.tl-unit { font-size: 24rpx; color: var(--text-muted); }
+.tl-tags { display: flex; flex-wrap: wrap; }
+.tl-meta { font-size: 22rpx; color: var(--text-muted); margin-top: 8rpx; display: block; }
+
+.tl-delete {
+  position: absolute; top: 12rpx; right: 16rpx;
+  width: 40rpx; height: 40rpx; border-radius: 50%;
+  background: #FEE2E2; color: #EF4444; font-size: 22rpx;
+  display: flex; align-items: center; justify-content: center;
+}

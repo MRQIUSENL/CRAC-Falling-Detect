@@ -1,0 +1,96 @@
+<!-- 首页 -->
+<view class="index-page">
+  <!-- 头部 -->
+  <view class="hero">
+    <view class="hero-bg"></view>
+    <view class="hero-content">
+      <view class="hero-icon-wrap">
+        <view class="hero-icon">🛡️</view>
+      </view>
+      <view class="hero-title gradient-text">摔倒检测工具</view>
+      <view class="hero-sub">YOLO11 · 实时监测 · 安全守护</view>
+    </view>
+  </view>
+
+  <!-- 连接状态 -->
+  <view class="status-wrap">
+    <view class="status-chip {{serverOnline === true ? 'online' : serverOnline === false ? 'offline' : 'checking'}}" bindtap="refreshStatus">
+      <view class="status-dot"></view>
+      <text>{{serverOnline === true ? '服务已连接' : serverOnline === false ? '点击连接服务' : '检测中...'}}</text>
+      <text class="status-model" wx:if="{{serverOnline && currentModel}}">{{currentModel}}</text>
+    </view>
+  </view>
+
+  <!-- 快捷操作 -->
+  <view class="actions">
+    <view class="action-card" bindtap="navigateTo" data-page="/pages/detect/detect">
+      <view class="action-icon-wrap" style="background:#EEF1FE;">
+        <text class="action-icon">🖼️</text>
+      </view>
+      <view class="action-info">
+        <text class="action-title">图片检测</text>
+        <text class="action-desc">上传照片识别摔倒</text>
+      </view>
+      <text class="action-arrow">→</text>
+    </view>
+
+    <view class="action-card" bindtap="navigateTo" data-page="/pages/camera/camera">
+      <view class="action-icon-wrap" style="background:#FEF3C7;">
+        <text class="action-icon">📹</text>
+      </view>
+      <view class="action-info">
+        <text class="action-title">实时监测</text>
+        <text class="action-desc">摄像头实时画面</text>
+      </view>
+      <text class="action-arrow">→</text>
+    </view>
+
+    <view class="action-card" bindtap="navigateTo" data-page="/pages/history/history">
+      <view class="action-icon-wrap" style="background:#ECFDF5;">
+        <text class="action-icon">📋</text>
+      </view>
+      <view class="action-info">
+        <text class="action-title">历史记录</text>
+        <text class="action-desc">过往检测结果</text>
+      </view>
+      <text class="action-arrow">→</text>
+    </view>
+
+    <view class="action-card" bindtap="navigateTo" data-page="/pages/settings/settings">
+      <view class="action-icon-wrap" style="background:#F3E8FF;">
+        <text class="action-icon">⚙️</text>
+      </view>
+      <view class="action-info">
+        <text class="action-title">系统设置</text>
+        <text class="action-desc">模型与参数配置</text>
+      </view>
+      <text class="action-arrow">→</text>
+    </view>
+
+    <view class="action-card" bindtap="navigateTo" data-page="/pages/license/license">
+      <view class="action-icon-wrap" style="background:#FCE7F3;">
+        <text class="action-icon">📜</text>
+      </view>
+      <view class="action-info">
+        <text class="action-title">开源许可</text>
+        <text class="action-desc">AGPL-3.0 · 邱森林, 雷诗雨, 章莹</text>
+      </view>
+      <text class="action-arrow">→</text>
+    </view>
+  </view>
+
+  <!-- 特性 -->
+  <view class="features">
+    <view class="feature-item" wx:for="{{features}}" wx:key="title">
+      <view class="feature-bullet">{{item.icon}}</view>
+      <text>{{item.title}}</text>
+    </view>
+  </view>
+
+  <!-- 底部 -->
+  <view class="footer">
+    <text class="footer-line">智眸银龄守望队参赛作品</text>
+    <text class="footer-line">Authors is ：<text class="footer-bold">邱森林 雷诗雨 章莹</text></text>
+    <text class="footer-line footer-bold">开源许可：AGPL-3.0</text>
+  </view>
+</view>

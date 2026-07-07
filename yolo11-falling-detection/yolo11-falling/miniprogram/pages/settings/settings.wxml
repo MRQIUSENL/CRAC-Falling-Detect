@@ -1,0 +1,88 @@
+<!-- 设置 -->
+<view class="settings-page">
+  <!-- 服务 -->
+  <view class="section">
+    <view class="section-title">🔗 后端服务</view>
+    <view class="card-flat">
+      <view class="set-row">
+        <text class="set-label">API 地址</text>
+        <input class="set-input" value="{{apiBaseUrl}}" placeholder="http://IP:8000" bindinput="onApiUrlInput"/>
+      </view>
+      <view class="set-row flex-between">
+        <text class="set-label">连接状态</text>
+        <view class="flex-row gap-8">
+          <view class="dot-sm {{serverOnline ? 'green' : 'red'}}"></view>
+          <text class="text-sm {{serverOnline ? 'text-success' : 'text-danger'}}">{{serverOnline ? '已连接' : '未连接'}}</text>
+        </view>
+      </view>
+      <button class="btn btn-outline btn-sm btn-block mt-16" bindtap="checkConnection">测试连接</button>
+    </view>
+  </view>
+
+  <!-- 参数 -->
+  <view class="section">
+    <view class="section-title">📊 默认检测参数</view>
+    <view class="card-flat">
+      <view class="set-row">
+        <view class="flex-between mb-8">
+          <text class="set-label">置信度阈值</text>
+          <text class="text-sm font-bold text-primary">{{defaultConfThreshold}}</text>
+        </view>
+        <slider min="0.05" max="0.95" step="0.05" value="{{defaultConfThreshold}}"
+          activeColor="#4F6EF7" backgroundColor="#E5E7EB" block-size="18" bindchange="onConfChange"/>
+      </view>
+      <view class="set-row">
+        <view class="flex-between mb-8">
+          <text class="set-label">IoU 阈值</text>
+          <text class="text-sm font-bold text-primary">{{defaultIouThreshold}}</text>
+        </view>
+        <slider min="0.1" max="0.9" step="0.05" value="{{defaultIouThreshold}}"
+          activeColor="#4F6EF7" backgroundColor="#E5E7EB" block-size="18" bindchange="onIouChange"/>
+      </view>
+      <view class="set-row">
+        <text class="set-label mb-12">默认追踪模式</text>
+        <picker mode="selector" range="{{trackerOptions}}" value="{{defaultTrackerIndex}}" bindchange="onTrackerChange">
+          <view class="picker-box">{{trackerOptions[defaultTrackerIndex]}}</view>
+        </picker>
+      </view>
+    </view>
+  </view>
+
+  <!-- 模型 -->
+  <view class="section">
+    <view class="section-title">🧠 模型管理</view>
+    <view class="card-flat">
+      <view class="flex-between mb-16" wx:if="{{currentModel}}">
+        <text class="set-label">当前模型</text>
+        <text class="text-sm font-semibold text-primary">{{currentModel}}</text>
+      </view>
+
+      <view class="model-list">
+        <view class="model-item flex-between {{currentModel === item.name ? 'active' : ''}}"
+          wx:for="{{modelList}}" wx:key="name"
+          data-name="{{item.name}}" bindtap="switchModel">
+          <text class="model-name">{{item.name}}</text>
+          <text class="model-badge" wx:if="{{currentModel === item.name}}">当前</text>
+          <text class="model-switch" wx:else>切换</text>
+        </view>
+      </view>
+
+      <view class="text-center text-sm text-muted mt-20" wx:if="{{modelList.length === 0}}">
+        未发现模型文件
+      </view>
+
+      <button class="btn btn-outline btn-sm btn-block mt-16" bindtap="refreshModels">刷新模型列表</button>
+    </view>
+  </view>
+
+  <!-- 保存 -->
+  <button class="btn btn-primary btn-block btn-lg mt-24" bindtap="saveAllSettings">💾 保存设置</button>
+
+  <!-- 关于 -->
+  <view class="about">
+    <text class="about-title">摔倒检测工具</text>
+    <text class="about-ver">v1.0.0 · FastAPI · WeChat Mini Program </text>
+    <text class="footer-line">Authors is ：<text class="footer-bold">邱森林 雷诗雨 章莹</text></text>
+    <text class="footer-line footer-bold">开源许可：AGPL-3.0</text>
+  </view>
+</view>

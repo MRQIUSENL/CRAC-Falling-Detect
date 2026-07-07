@@ -1,0 +1,70 @@
+# ========== Python ==========
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# ========== 虚拟环境 ==========
+venv/
+env/
+.venv/
+.conda/
+CRAC/
+
+# ========== Jupyter ==========
+.ipynb_checkpoints/
+
+# ========== Gradio ==========
+.gradio/
+flagged/
+
+# ========== YOLO 训练输出 ==========
+runs/
+weights/
+checkpoints/
+*.pt
+*.pth
+*.ckpt
+*.weights
+*.cfg.bak
+*.onnx
+*.engine
+*.pb
+tensorboard/
+wandb/
+logs/
+
+# ========== 数据集 ==========
+/datasets/
+/data/images/
+/data/labels/
+/data/raw/
+/data/processed/
+falling_data/
+!/data/.gitkeep
+
+# ========== 媒体/压缩包 ==========
+*.jpg
+*.png
+*.bmp
+*.mp4
+*.avi
+*.zip
+*.tar.gz
+*.rar
+*.AppImage
+
+# ========== IDE & 系统 ==========
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# ========== 密钥/环境 ==========
+.env
+secrets.yaml

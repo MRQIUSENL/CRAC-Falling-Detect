@@ -1,0 +1,46 @@
+/* 设置 */
+.settings-page { padding: 24rpx; padding-bottom: 60rpx; }
+
+.section { margin-bottom: 28rpx; }
+.section-title { font-size: 28rpx; font-weight: 700; color: var(--text); margin-bottom: 16rpx; }
+
+.set-row { margin-bottom: 20rpx; }
+.set-row:last-child { margin-bottom: 0; }
+.set-label { font-size: 26rpx; color: var(--text-secondary); }
+.set-input {
+  padding: 18rpx 24rpx; background: var(--bg); border-radius: var(--radius-sm);
+  font-size: 26rpx; color: var(--text); margin-top: 8rpx;
+}
+.picker-box {
+  padding: 18rpx 24rpx; background: var(--bg); border-radius: var(--radius-sm);
+  font-size: 26rpx; color: var(--text);
+}
+
+.dot-sm { width: 12rpx; height: 12rpx; border-radius: 50%; }
+.dot-sm.green { background: var(--success); }
+.dot-sm.red { background: var(--danger); }
+
+.model-list { border-top: 1rpx solid var(--border); padding-top: 8rpx; }
+.model-item {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18rpx 16rpx; border-radius: var(--radius-sm); margin-top: 4rpx;
+  background: #F9FAFB;
+}
+.model-item.active { background: var(--primary-light); }
+.model-name {
+  font-size: 26rpx; color: var(--text); flex: 1;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.model-badge {
+  font-size: 22rpx; color: var(--primary); font-weight: 600; flex-shrink: 0; margin-left: 12rpx;
+}
+.model-switch {
+  font-size: 22rpx; color: var(--text-muted); flex-shrink: 0; margin-left: 12rpx;
+}
+
+/* 关于 */
+.about { text-align: center; padding: 48rpx 0 24rpx; }
+.about-title { display: block; font-size: 28rpx; font-weight: 600; color: var(--text); margin-bottom: 8rpx; }
+.about-ver { display: block; font-size: 22rpx; color: var(--text-muted); margin-bottom: 6rpx; }
+.footer-line { display: block; margin-bottom: 8rpx; font-size: 22rpx; color: var(--text-muted); }
+.footer-bold { font-weight: 700; color: #6B7280; }

@@ -1,0 +1,83 @@
+/* 实时检测 */
+.camera-page { padding-bottom: 48rpx; }
+
+.cam-wrap {
+  width: 100%; height: 640rpx; background: #1a1a2e;
+  position: relative; overflow: hidden;
+}
+.cam-view { width: 100%; height: 100%; }
+
+.cam-overlay {
+  position: absolute; top: 24rpx; left: 24rpx; right: 24rpx;
+  pointer-events: none; display: flex; flex-direction: column; gap: 12rpx;
+}
+.cam-badge {
+  display: inline-flex; align-items: center; gap: 8rpx;
+  background: rgba(0,0,0,0.7); border-radius: 999rpx;
+  padding: 10rpx 22rpx; align-self: flex-start;
+}
+.cam-badge-num { color: #4ADE80; font-size: 36rpx; font-weight: 800; }
+.cam-badge-text { color: rgba(255,255,255,0.8); font-size: 22rpx; }
+.cam-tags { display: flex; flex-wrap: wrap; gap: 8rpx; }
+.cam-tag {
+  background: rgba(79,110,247,0.85); color: #fff;
+  font-size: 20rpx; padding: 6rpx 16rpx; border-radius: 999rpx;
+}
+
+/* 摔倒告警浮层 */
+.cam-fall-alert {
+  background: rgba(239, 68, 68, 0.92);
+  border-radius: 16rpx;
+  padding: 16rpx 20rpx;
+  border: 2rpx solid rgba(255,255,255,0.3);
+  animation: alertPulse 1s infinite;
+}
+@keyframes alertPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.75; }
+}
+.cam-fall-icon { font-size: 32rpx; }
+.cam-fall-text { color: #fff; font-size: 24rpx; font-weight: 700; margin-bottom: 4rpx; }
+.cam-fall-timer { color: rgba(255,255,255,0.85); font-size: 20rpx; margin-bottom: 8rpx; }
+.cam-fall-bar {
+  width: 100%; height: 6rpx; background: rgba(255,255,255,0.3);
+  border-radius: 3rpx; overflow: hidden;
+}
+.cam-fill {
+  height: 100%; background: #fff;
+  border-radius: 3rpx; transition: width 0.5s;
+}
+
+.cam-off {
+  width: 100%; height: 100%; background: #0f0f23;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+}
+.cam-off-icon { font-size: 80rpx; margin-bottom: 20rpx; opacity: 0.8; }
+.cam-off-title { font-size: 32rpx; font-weight: 600; color: #fff; margin-bottom: 8rpx; }
+.cam-off-desc { font-size: 24rpx; color: rgba(255,255,255,0.5); }
+
+.cam-result { margin: 20rpx 24rpx; background: #fff; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-sm); }
+.cam-result-head { border-bottom: 1rpx solid var(--border); }
+.cam-result-img { width: 100%; display: block; }
+
+.cam-controls { margin: 0 24rpx; }
+
+/* 告警指示条 */
+.warning-bar {
+  margin: 16rpx 24rpx;
+  padding: 20rpx 24rpx;
+  border-radius: var(--radius-sm);
+  background: #FEF3C7;
+  display: flex; align-items: center; gap: 12rpx;
+}
+.warning-bar.triggered {
+  background: #FEE2E2;
+  animation: alertPulse 1s infinite;
+}
+.warning-icon { font-size: 32rpx; }
+.warning-msg { font-size: 26rpx; font-weight: 600; color: #92400E; flex: 1; }
+.warning-bar.triggered .warning-msg { color: #991B1B; }
+
+/* 告警演示 */
+.alert-demo { margin: 24rpx; }
+.demo-desc { font-size: 24rpx; color: var(--text-muted); line-height: 1.5; }

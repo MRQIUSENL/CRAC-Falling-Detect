@@ -1,0 +1,65 @@
+/* 图片检测 */
+.detect-page { padding: 24rpx; padding-bottom: 48rpx; }
+
+/* 上传区 */
+.img-upload { height: 520rpx; margin-bottom: 20rpx; }
+.upload-icon { font-size: 72rpx; margin-bottom: 16rpx; }
+.upload-title { font-size: 30rpx; font-weight: 600; color: var(--primary); margin-bottom: 8rpx; }
+.upload-hint { font-size: 24rpx; color: var(--text-muted); }
+
+/* 单图 */
+.img-single { margin-bottom: 20rpx; }
+.single-img { width: 100%; height: 520rpx; border-radius: var(--radius); background: #fff; }
+.single-hint { text-align: center; font-size: 24rpx; color: var(--text-muted); margin-top: 12rpx; }
+
+/* 对比 */
+.img-compare { display: flex; align-items: center; gap: 8rpx; margin-bottom: 20rpx; }
+.compare-item { flex: 1; }
+.compare-img { width: 100%; height: 340rpx; border-radius: var(--radius); background: #fff; }
+.compare-label { text-align: center; font-size: 24rpx; color: var(--text-muted); margin-top: 8rpx; }
+.compare-label.result { color: var(--success); font-weight: 600; }
+.compare-vs { font-size: 32rpx; color: var(--primary); font-weight: 700; padding: 0 4rpx; }
+
+/* 参数 */
+.param-panel { margin-bottom: 20rpx; }
+.param-row { margin-bottom: 24rpx; }
+.param-row:last-child { margin-bottom: 0; }
+.param-head { margin-bottom: 6rpx; }
+.param-label { font-size: 26rpx; color: var(--text-secondary); }
+.param-val { font-size: 26rpx; font-weight: 600; color: var(--primary); }
+.picker-box {
+  padding: 18rpx 24rpx; background: var(--bg); border-radius: var(--radius-sm);
+  font-size: 26rpx; color: var(--text);
+}
+
+/* 按钮 */
+.btn-area { margin-bottom: 24rpx; }
+.btn-row { display: flex; }
+
+/* 结果 */
+.result-panel { margin-top: 8rpx; }
+.stats-row { display: flex; align-items: center; }
+.stat-block { flex: 1; text-align: center; }
+.stat-num { display: block; font-size: 44rpx; font-weight: 800; }
+.stat-label { display: block; font-size: 24rpx; color: var(--text-muted); margin-top: 4rpx; }
+.stat-divider { width: 2rpx; height: 48rpx; background: var(--border); }
+.tags-row { display: flex; flex-wrap: wrap; justify-content: center; }
+
+/* 检测列表 */
+.result-list { background: #fff; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-sm); }
+.list-header { border-bottom: 1rpx solid var(--border); }
+.det-item {
+  display: flex; align-items: center; gap: 16rpx;
+  padding: 20rpx 24rpx; border-bottom: 1rpx solid #F9FAFB;
+}
+.det-item:last-child { border-bottom: none; }
+.det-rank {
+  width: 44rpx; height: 44rpx; border-radius: 50%;
+  background: var(--primary-light); color: var(--primary);
+  font-size: 24rpx; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.det-body { flex: 1; min-width: 0; }
+.det-name { font-size: 28rpx; font-weight: 600; color: var(--text); margin-bottom: 4rpx; }
+.det-meta { font-size: 22rpx; display: flex; flex-wrap: wrap; }

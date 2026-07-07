@@ -1,0 +1,87 @@
+<view class="license-page">
+  <!-- 头部 -->
+  <view class="header">
+    <text class="logo">🛡️</text>
+    <text class="name">摔倒检测工具</text>
+    <text class="ver">v1.0.0</text>
+  </view>
+
+  <!-- 作者 -->
+  <view class="card">
+    <view class="card-title">👤 作者</view>
+    <view class="item">
+      <text class="label">Author</text>
+      <text class="value">邱森林, 雷诗雨, 章莹</text>
+    </view>
+    <view class="item">
+      <text class="label">Year</text>
+      <text class="value">{{year}}</text>
+    </view>
+  </view>
+
+  <!-- 许可证 -->
+  <view class="card">
+    <view class="card-title">📜 许可证</view>
+    <view class="badge">GNU AGPL-3.0</view>
+    <text class="desc">本软件遵循 GNU Affero General Public License v3.0 (AGPL-3.0) 开源许可协议。AGPL-3.0 是一种强 Copyleft 许可证，要求任何修改后的版本在以网络服务形式提供时，也必须向用户开放源代码。</text>
+    <text class="desc">本许可证保障用户自由使用、研究、修改和分享本软件的权利。软件按"原样"提供，不提供任何形式的明示或暗示担保。</text>
+  </view>
+
+  <!-- 许可条款 -->
+  <view class="card">
+    <view class="card-title">📋 许可条款</view>
+    <view class="terms">
+      <text class="term">✅ 允许</text>
+      <view class="term-list">
+        <text class="term-item">• 商业使用</text>
+        <text class="term-item">• 修改源代码</text>
+        <text class="term-item">• 分发原始或修改后的副本</text>
+        <text class="term-item">• 私人使用</text>
+        <text class="term-item">• 专利授权</text>
+      </view>
+    </view>
+    <view class="terms">
+      <text class="term">⚠️ 条件</text>
+      <view class="term-list">
+        <text class="term-item">• 需保留原始版权声明</text>
+        <text class="term-item">• 需保留 AGPL-3.0 许可证文本</text>
+        <text class="term-item">• 修改后需注明变更内容</text>
+        <text class="term-item">• 公开源代码（含网络服务使用）</text>
+        <text class="term-item">• 衍生作品必须同样以 AGPL-3.0 许可</text>
+      </view>
+    </view>
+    <view class="terms">
+      <text class="term">🚫 限制</text>
+      <view class="term-list">
+        <text class="term-item">• 不提供任何担保</text>
+        <text class="term-item">• 作者不承担任何责任</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 完整许可文本 -->
+  <view class="card">
+    <view class="card-title">📄 GNU AGPL-3.0 全文摘要</view>
+    <view class="license-text">
+      <text>YOLO11 Falling Detection
+Copyright (C) 2026 邱森林, 雷诗雨, 章莹
+
+This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License along with this program. If not, see https://www.gnu.org/licenses/.
+
+---
+GNU AFFERO GENERAL PUBLIC LICENSE
+Version 3, 19 November 2007
+
+Copyright (C) 2007 Free Software Foundation, Inc.
+https://fsf.org/
+
+Everyone is permitted to copy and distribute verbatim copies of this license document, but changing it is not allowed.
+
+完整许可文本请参阅项目根目录下的 LICENSE 文件，或访问 https://www.gnu.org/licenses/agpl-3.0.html</text>
+    </view>
+  </view>
+</view>

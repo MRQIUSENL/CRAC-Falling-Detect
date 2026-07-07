@@ -1,0 +1,101 @@
+<!-- 实时检测 -->
+<view class="camera-page">
+  <!-- 摄像头 -->
+  <view class="cam-wrap">
+    <camera wx:if="{{cameraOpened}}" device-position="back" flash="off"
+      frame-size="medium" binderror="onCameraError" class="cam-view">
+      <!-- 浮层 -->
+      <cover-view class="cam-overlay" wx:if="{{lastResult}}">
+        <cover-view class="cam-badge">
+          <cover-view class="cam-badge-num">{{lastResult.total_objects}}</cover-view>
+          <cover-view class="cam-badge-text">目标</cover-view>
+        </cover-view>
+        <cover-view class="cam-tags" wx:if="{{countsArray.length > 0}}">
+          <cover-view class="cam-tag" wx:for="{{countsArray}}" wx:key="name"
+            style="{{item.name === '摔倒' ? 'background:#EF4444;' : ''}}">
+            {{item.name}}:{{item.count}}
+          </cover-view>
+        </cover-view>
+
+        <!-- 摔倒计时警告 -->
+        <cover-view class="cam-fall-alert" wx:if="{{fallActive}}">
+          <cover-view class="cam-fall-icon">⚠️</cover-view>
+          <cover-view class="cam-fall-text">
+            {{warningTriggered ? '摔倒警报!' : '检测到摔倒'}}
+          </cover-view>
+          <cover-view class="cam-fall-timer">
+            {{fallDuration}}s / {{warningTriggered ? '已触发' : '10s触发'}}
+          </cover-view>
+          <cover-view class="cam-fall-bar">
+            <cover-view class="cam-fill" style="width:{{warningTriggered ? 100 : fallDuration * 10}}%"></cover-view>
+          </cover-view>
+        </cover-view>
+      </cover-view>
+    </camera>
+
+    <view class="cam-off" wx:if="{{!cameraOpened}}">
+      <view class="cam-off-icon">📹</view>
+      <view class="cam-off-title">摄像头未开启</view>
+      <view class="cam-off-desc">点击下方按钮开启实时检测</view>
+    </view>
+  </view>
+
+  <!-- 摔倒告警指示条 -->
+  <view class="warning-bar {{warningTriggered ? 'triggered' : ''}}" wx:if="{{fallActive}}">
+    <text class="warning-icon">⚠️</text>
+    <text class="warning-msg">{{warningTriggered ? '摔倒警报已触发！请立即处理' : '检测到摔倒，持续 ' + fallDuration + ' 秒后将触发警报'}}</text>
+  </view>
+
+  <!-- 最近结果 -->
+  <view class="cam-result" wx:if="{{annotatedFrame}}">
+    <view class="cam-result-head flex-between p-16">
+      <text class="text-sm font-semibold text-secondary">最近检测帧</text>
+      <text class="text-sm text-muted">{{lastResult.inference_time_ms}}ms</text>
+    </view>
+    <image src="{{annotatedFrame}}" mode="widthFix" class="cam-result-img"/>
+  </view>
+
+  <!-- 控制 -->
+  <view class="cam-controls card-flat">
+    <button class="btn btn-primary btn-block btn-lg mb-16" bindtap="toggleCamera">
+      {{cameraOpened ? '⏹ 停止' : '📹 开启摄像头'}}
+    </button>
+
+    <view wx:if="{{cameraOpened}}" class="flex gap-12">
+      <button class="btn {{detecting ? 'btn-outline' : 'btn-primary'}} btn-sm flex-1"
+        bindtap="toggleAutoDetect">
+        {{detecting ? '⏸ 暂停' : '▶ 自动检测'}}
+      </button>
+      <button class="btn btn-primary btn-sm flex-1"
+        bindtap="captureOnce" disabled="{{manualDetecting}}">
+        {{manualDetecting ? '处理中' : '📸 拍一张'}}
+      </button>
+    </view>
+
+    <view wx:if="{{detecting}}" class="mt-12 text-center text-sm text-success">● 自动检测运行中…</view>
+
+    <view class="mt-16" wx:if="{{cameraOpened}}">
+      <view class="flex-between mb-8">
+        <text class="text-sm text-secondary">检测间隔</text>
+        <text class="text-sm font-semibold text-primary">{{interval}}ms</text>
+      </view>
+      <slider min="500" max="5000" step="100" value="{{interval}}"
+        activeColor="#4F6EF7" backgroundColor="#E5E7EB" block-size="16" bindchange="onIntervalChange"/>
+    </view>
+  </view>
+
+  <!-- 告警演示 -->
+  <view class="alert-demo card-flat">
+    <view class="flex-between mb-16">
+      <text class="text-sm font-semibold text-secondary">🔔 告警演示</text>
+      <text class="text-sm text-muted">提前了解告警状态</text>
+    </view>
+    <text class="demo-desc">点击下方按钮模拟摔倒告警，体验完整的告警流程（振动+弹窗+倒计时）</text>
+    <button class="btn btn-danger btn-sm btn-block mt-16" bindtap="demoAlert">
+      {{demoRunning ? '演示进行中...' : '🚨 模拟摔倒告警'}}
+    </button>
+    <button class="btn btn-outline btn-sm btn-block mt-8" bindtap="demoQuickAlert" wx:if="{{!demoRunning}}">
+      ⚡ 快速演示（直接触发警报）
+    </button>
+  </view>
+</view>

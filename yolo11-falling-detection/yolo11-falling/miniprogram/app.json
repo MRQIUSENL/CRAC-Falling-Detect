@@ -1,0 +1,56 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/detect/detect",
+    "pages/camera/camera",
+    "pages/history/history",
+    "pages/settings/settings",
+    "pages/license/license"
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#4F6EF7",
+    "navigationBarTitleText": "摔倒检测工具",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#F0F2F8"
+  },
+  "tabBar": {
+    "color": "#9CA3AF",
+    "selectedColor": "#4F6EF7",
+    "backgroundColor": "#FFFFFF",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "images/home.png",
+        "selectedIconPath": "images/home_active.png"
+      },
+      {
+        "pagePath": "pages/detect/detect",
+        "text": "图片检测",
+        "iconPath": "images/detect.png",
+        "selectedIconPath": "images/detect_active.png"
+      },
+      {
+        "pagePath": "pages/camera/camera",
+        "text": "实时检测",
+        "iconPath": "images/camera.png",
+        "selectedIconPath": "images/camera_active.png"
+      },
+      {
+        "pagePath": "pages/history/history",
+        "text": "历史记录",
+        "iconPath": "images/history.png",
+        "selectedIconPath": "images/history_active.png"
+      },
+      {
+        "pagePath": "pages/settings/settings",
+        "text": "设置",
+        "iconPath": "images/settings.png",
+        "selectedIconPath": "images/settings_active.png"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}
