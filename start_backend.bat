@@ -1,77 +1,72 @@
 @echo off
-setlocal enabledelayedexpansion
+chcp 65001 >nul
 set "DIR=%~dp0"
 
 :: ============================================
-::  YOLO11 摔倒检测 — 后端启动脚本
+::  YOLO11 Fall Detection - Backend Launcher
 :: ============================================
 
-:: 1. 查找可用的 Python 解释器
+:: 1. Find Python
 set "PYTHON="
 set "PIP="
 
-:: 1a. 项目 venv
 if exist "%DIR%venv\Scripts\python.exe" (
     set "PYTHON=%DIR%venv\Scripts\python.exe"
     set "PIP=%DIR%venv\Scripts\pip.exe"
-    echo [INFO] 使用 venv Python
+    echo [INFO] Using venv Python
     goto :check_deps
 )
 
-:: 1b. CRAC 虚拟环境
 if exist "%DIR%CRAC\Scripts\python.exe" (
     set "PYTHON=%DIR%CRAC\Scripts\python.exe"
     set "PIP=%DIR%CRAC\Scripts\pip.exe"
-    echo [INFO] 使用 CRAC Python
+    echo [INFO] Using CRAC Python
     goto :check_deps
 )
 
-:: 1c. 系统 Python
 where python >nul 2>&1
 if %errorlevel% equ 0 (
     for /f "delims=" %%i in ('where python') do set "PYTHON=%%i"
     for /f "delims=" %%i in ('where pip') do set "PIP=%%i"
-    echo [INFO] 使用系统 Python: !PYTHON!
+    echo [INFO] Using system Python
     goto :check_deps
 )
 
-:: 未找到 Python
-echo [ERROR] 未找到 Python，请安装 Python 或创建虚拟环境。
-echo          conda create -n yolo python=3.8 -y ^&^& conda activate yolo
+echo [ERROR] Python not found
 pause
 exit /b 1
 
 
 :: ============================================
-::  检查 & 安装依赖
+::  Check & Install Dependencies
 :: ============================================
 :check_deps
-echo [INFO] 检查后端依赖...
+echo [INFO] Checking dependencies...
 
 "%PYTHON%" -c "import fastapi" 2>nul
 if %errorlevel% neq 0 (
-    echo [WARN] fastapi 未安装，正在自动安装依赖...
+    echo [WARN] fastapi not found, installing...
     "%PIP%" install fastapi uvicorn python-multipart -i https://pypi.tuna.tsinghua.edu.cn/simple
     if %errorlevel% neq 0 (
-        echo [ERROR] 依赖安装失败，请手动执行:
-        echo          "%PIP%" install fastapi uvicorn python-multipart
+        echo [ERROR] Install failed. Run manually:
+        echo         pip install fastapi uvicorn python-multipart
         pause
         exit /b 1
     )
-    echo [ OK ] 依赖安装完成
+    echo [ OK ] Dependencies installed
 ) else (
-    echo [ OK ] 依赖已就绪
+    echo [ OK ] Dependencies ready
 )
 
 
 :: ============================================
-::  启动后端服务
+::  Start Backend
 :: ============================================
 echo.
 echo ============================================
-echo   YOLO11 摔倒检测系统 API 启动中...
-echo   访问地址: http://localhost:8000
-echo   API 文档:  http://localhost:8000/docs
+echo   YOLO11 Fall Detection API
+echo   http://localhost:8000
+echo   http://localhost:8000/docs
 echo ============================================
 echo.
 
@@ -79,4 +74,3 @@ cd /d "%DIR%"
 "%PYTHON%" "%DIR%backend\main.py"
 
 pause
-endlocal
