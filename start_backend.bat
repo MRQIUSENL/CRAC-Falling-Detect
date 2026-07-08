@@ -6,26 +6,29 @@ set "DIR=%~dp0"
 ::  YOLO11 Fall Detection - Backend Launcher
 :: ============================================
 
-:: 1. Find Python
-set "PYTHON="
-
+:: 1. venv
 if exist "%DIR%venv\Scripts\python.exe" (
-    set "PYTHON=%DIR%venv\Scripts\python.exe"
     echo [INFO] Using venv Python
-    goto :start
+    call :run "%DIR%venv\Scripts\python.exe"
+    pause
+    exit /b
 )
 
+:: 2. CRAC
 if exist "%DIR%CRAC\Scripts\python.exe" (
-    set "PYTHON=%DIR%CRAC\Scripts\python.exe"
     echo [INFO] Using CRAC Python
-    goto :start
+    call :run "%DIR%CRAC\Scripts\python.exe"
+    pause
+    exit /b
 )
 
-where python >nul 2>&1
+:: 3. system python
+python --version >nul 2>&1
 if %errorlevel% equ 0 (
-    for /f "delims=" %%i in ('where python') do set "PYTHON=%%i"
-    echo [INFO] Using system Python: %PYTHON%
-    goto :start
+    echo [INFO] Using system Python
+    call :run python
+    pause
+    exit /b
 )
 
 echo [ERROR] Python not found
@@ -34,11 +37,10 @@ exit /b 1
 
 
 :: ============================================
-::  Install & Start
-:: ============================================
-:start
+:run
+set "PY=%1"
 echo [INFO] Ensuring dependencies...
-"%PYTHON%" -m pip install fastapi uvicorn python-multipart -i https://pypi.tuna.tsinghua.edu.cn/simple --quiet 2>nul
+"%PY%" -m pip install fastapi uvicorn python-multipart -i https://pypi.tuna.tsinghua.edu.cn/simple --quiet 2>nul
 
 echo.
 echo ============================================
@@ -49,12 +51,12 @@ echo ============================================
 echo.
 
 cd /d "%DIR%"
-"%PYTHON%" "%DIR%backend\main.py"
+"%PY%" "%DIR%backend\main.py"
 
 if %errorlevel% neq 0 (
     echo.
-    echo [ERROR] Backend exited with code %errorlevel%
-    echo [INFO] If module not found, run manually:
+    echo [ERROR] Backend failed. Run manually:
     echo        python -m pip install fastapi uvicorn python-multipart ultralytics opencv-python
+    echo        python backend\main.py
 )
-pause
+exit /b
