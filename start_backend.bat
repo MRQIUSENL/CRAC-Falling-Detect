@@ -12,20 +12,20 @@ set "PYTHON="
 if exist "%DIR%venv\Scripts\python.exe" (
     set "PYTHON=%DIR%venv\Scripts\python.exe"
     echo [INFO] Using venv Python
-    goto :check_deps
+    goto :start
 )
 
 if exist "%DIR%CRAC\Scripts\python.exe" (
     set "PYTHON=%DIR%CRAC\Scripts\python.exe"
     echo [INFO] Using CRAC Python
-    goto :check_deps
+    goto :start
 )
 
 where python >nul 2>&1
 if %errorlevel% equ 0 (
     for /f "delims=" %%i in ('where python') do set "PYTHON=%%i"
-    echo [INFO] Using system Python
-    goto :check_deps
+    echo [INFO] Using system Python: %PYTHON%
+    goto :start
 )
 
 echo [ERROR] Python not found
@@ -34,30 +34,12 @@ exit /b 1
 
 
 :: ============================================
-::  Check & Install Dependencies
+::  Install & Start
 :: ============================================
-:check_deps
-echo [INFO] Checking dependencies...
+:start
+echo [INFO] Ensuring dependencies...
+"%PYTHON%" -m pip install fastapi uvicorn python-multipart -i https://pypi.tuna.tsinghua.edu.cn/simple --quiet 2>nul
 
-"%PYTHON%" -c "import fastapi" 2>nul
-if %errorlevel% neq 0 (
-    echo [WARN] fastapi not found, installing...
-    "%PYTHON%" -m pip install fastapi uvicorn python-multipart -i https://pypi.tuna.tsinghua.edu.cn/simple
-    if %errorlevel% neq 0 (
-        echo [ERROR] Install failed. Run manually:
-        echo         python -m pip install fastapi uvicorn python-multipart
-        pause
-        exit /b 1
-    )
-    echo [ OK ] Dependencies installed
-) else (
-    echo [ OK ] Dependencies ready
-)
-
-
-:: ============================================
-::  Start Backend
-:: ============================================
 echo.
 echo ============================================
 echo   YOLO11 Fall Detection API
@@ -69,4 +51,10 @@ echo.
 cd /d "%DIR%"
 "%PYTHON%" "%DIR%backend\main.py"
 
+if %errorlevel% neq 0 (
+    echo.
+    echo [ERROR] Backend exited with code %errorlevel%
+    echo [INFO] If module not found, run manually:
+    echo        python -m pip install fastapi uvicorn python-multipart ultralytics opencv-python
+)
 pause
